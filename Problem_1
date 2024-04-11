@@ -1,0 +1,40 @@
+function findWhiteBox(matrix) {
+  let topLeftRow = 0;
+  let topLeftCol = 0;
+  let width = 0;
+  let height = 0;
+
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (matrix[row][col] === 'w') {
+        topLeftRow = row;
+        topLeftCol = col;
+        break;
+      }
+    }
+  }
+
+  width = 1;
+  for (let col = topLeftCol + 1; col < matrix[topLeftRow].length; col++) {
+    if (matrix[topLeftRow][col] === 'w') {
+      width++;
+    } else {
+      break;
+    }
+  }
+
+  height = 1;
+  for (let row = topLeftRow + 1; row < matrix.length; row++) {
+    if (matrix[row][topLeftCol] === 'w') {
+      height++;
+    } else {
+      break;
+    }
+  }
+
+  return {
+    topLeft: { row: topLeftRow, col: topLeftCol },
+    width: width,
+    height: height,
+  };
+}
